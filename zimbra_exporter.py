@@ -3,8 +3,12 @@
 # ------------------------------------------------------
 #
 # Zimbra Exporter
+# Script by : Frederick Mbuya
+# Website : www.uhurulabs.org / www.uhurunet.com
+# Version : 1.1
+# Date : 2024/01/04
 #
-# Script by : Jason Cheng
+# Initial Script by : Jason Cheng
 # Website : www.jason.tools / blog.jason.tools
 # Version : 1.0
 # Date : 2021/11/28
@@ -132,12 +136,15 @@ def getcheck():
     Gauge("zimbra_iowait","IO_Wait:",registry=REGISTRY).set(str(psutil.cpu_times_percent()).split(",")[4].split("=")[1].strip())
     Gauge("zimbra_uptime","Up Time:",registry=REGISTRY).set((time.time()-psutil.boot_time())/60/60/24)
 
-    get_df = os.popen('df / --output=pcent | tail -n 1').read().strip().replace('%','')
+    get_df = os.popen('df /opt/zimbra --output=pcent | tail -n 1').read().strip().replace('%','')
     zv = Gauge("zimbra_disk_usage","Disk Usage:",registry=REGISTRY).set(get_df)
+
+    get_df = os.popen('df /opt/zimbraBackup --output=pcent | tail -n 1').read().strip().replace('%','')
+    zv = Gauge("zimbra_backup_usage","Backup Disk Usage:",registry=REGISTRY).set(get_df)
 
 
     # get zimbra version
-    get_zv = os.popen('/bin/su - zimbra -c "/opt/zimbra/bin/zmcontrol -v"').read().split(' ')[6].strip()[:-1].replace("_"," ")
+    get_zv = os.popen('/bin/su - zimbra -c "/opt/zimbra/bin/zmcontrol -v"').read().split(' ')[1].strip()[:-12].replace("_"," ")
     zv = Gauge("zimbra_version","Zimbra Version:",["version"],registry=REGISTRY)
     zv.labels(get_zv).set(0)
 
