@@ -14,7 +14,7 @@
 import requests
 import prometheus_client
 import os
-import psutild
+import psutil
 import time
 import datetime
 import configparser
