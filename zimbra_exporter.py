@@ -3,12 +3,8 @@
 # ------------------------------------------------------
 #
 # Zimbra Exporter
-# Script by : Frederick Mbuya
-# Website : www.uhurulabs.org / www.uhurunet.com
-# Version : 1.1
-# Date : 2024/01/04
 #
-# Initial Script by : Jason Cheng
+# Script by : Jason Cheng
 # Website : www.jason.tools / blog.jason.tools
 # Version : 1.0
 # Date : 2021/11/28
@@ -32,7 +28,7 @@ from flask import Response,Flask
 
 PORT_EXPORTER = 9093
 
-MAILSERVER = 'mail.zimbra.domain'
+MAILSERVER = 'mx0.individual-privacy.com'
 EXCLUDE_DOMAIN = '' # If you want to filter out a specific domain, please add it here.
 
 PORT_SMTP = '25'
