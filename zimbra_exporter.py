@@ -3,14 +3,17 @@
 # ------------------------------------------------------
 #
 # Zimbra Exporter
+# Script by : Frederick Mbuya
+# Website : www.uhurulabs.org / www.uhurunet.com
+# Version : 1.1
+# Date : 2024/01/04
 #
-# Script by : Jason Cheng
+# Initial Script by : Jason Cheng
 # Website : www.jason.tools / blog.jason.tools
 # Version : 1.0
 # Date : 2021/11/28
 #
-# ------------------------------------------------------
-
+# --------------------------------------------------
 import requests
 import prometheus_client
 import os
@@ -36,6 +39,7 @@ config.read('/usr/local/bin/zimbra_exporter_config.ini')
 PORT_EXPORTER = config.get('Settings', 'PORT_EXPORTER')
 MAILSERVER = config.get('Settings', 'MAILSERVER')
 EXCLUDE_DOMAIN = config.get('Settings', 'EXCLUDE_DOMAIN')
+EXCLUDE_DOMAIN = ''
 PORT_SMTP = config.get('Settings', 'PORT_SMTP')
 PORT_IMAP = config.get('Settings', 'PORT_IMAP')
 PORT_IMAPS = config.get('Settings', 'PORT_IMAPS')
