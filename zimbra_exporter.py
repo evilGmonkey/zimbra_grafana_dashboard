@@ -17,6 +17,7 @@ import os
 import psutil
 import time
 import datetime
+import configparser
 from prometheus_client.core import CollectorRegistry
 from prometheus_client import Gauge
 from prometheus_client import Counter
@@ -26,17 +27,15 @@ from flask import Response,Flask
 # define
 # ------
 
-PORT_EXPORTER = 9093
-
-MAILSERVER = 'mx0.individual-privacy.com'
-EXCLUDE_DOMAIN = '' # If you want to filter out a specific domain, please add it here.
-
-PORT_SMTP = '25'
-PORT_IMAP = '143'
-PORT_IMAPS = '993'
-PORT_POP3 = '110'
-PORT_POP3S = '995'
-PORT_WEBCLIENT = '443'
+PORT_EXPORTER = config.get('Settings', 'PORT_EXPORTER')
+MAILSERVER = config.get('Settings', 'MAILSERVER')
+EXCLUDE_DOMAIN = config.get('Settings', 'EXCLUDE_DOMAIN')
+PORT_SMTP = config.get('Settings', 'PORT_SMTP')
+PORT_IMAP = config.get('Settings', 'PORT_IMAP')
+PORT_IMAPS = config.get('Settings', 'PORT_IMAPS')
+PORT_POP3 = config.get('Settings', 'PORT_POP3')
+PORT_POP3S = config.get('Settings', 'PORT_POP3S')
+PORT_WEBCLIENT = config.get('Settings', 'PORT_WEBCLIENT')
 
 # ------
 
@@ -64,7 +63,7 @@ def getcheck():
 
     # get stats
 
-    get_st = os.popen('/opt/zimbra_pflogsumm.pl /var/log/zimbra.log | grep -v Redundent').read().splitlines()
+    get_st = os.popen('/usr/local/bin/zimbra_pflogsumm.pl /var/log/zimbra.log | grep -v Redundent').read().splitlines()
     st = Gauge("zimbra_stats","Zimbra Stats:",["name"],registry=REGISTRY)
     for i in range(len(get_st)):
 
