@@ -14,7 +14,7 @@
 import requests
 import prometheus_client
 import os
-import psutil
+import psutild
 import time
 import datetime
 import configparser
@@ -27,7 +27,7 @@ from flask import Response,Flask
 config = configparser.ConfigParser()
 
 # Read the configuration file
-config.read('zimbra_exporter_config.ini')
+config.read('/usr/local/bin/zimbra_exporter_config.ini')
 
 # ------
 # define
