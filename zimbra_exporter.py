@@ -23,6 +23,12 @@ from prometheus_client import Gauge
 from prometheus_client import Counter
 from flask import Response,Flask
 
+# Create a ConfigParser object
+config = configparser.ConfigParser()
+
+# Read the configuration file
+config.read('zimbra_exporter_config.ini')
+
 # ------
 # define
 # ------
